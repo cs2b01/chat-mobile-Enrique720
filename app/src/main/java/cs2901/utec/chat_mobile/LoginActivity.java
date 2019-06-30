@@ -8,7 +8,6 @@ import android.widget.Toast;
 import java.util.Map;
 import java.util.HashMap;
 import org.json.JSONObject;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,7 +18,6 @@ import com.android.volley.toolbox.Volley;
 import android.content.Intent;
 import org.json.JSONException;
 import android.view.View;
-
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -42,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         // 1. Getting username and password inputs from view
         EditText txtUsername = (EditText) findViewById(R.id.txtUsername);
         EditText txtPassword = (EditText) findViewById(R.id.txtPassword);
-        String username = txtUsername.getText().toString();
+        final String username = txtUsername.getText().toString();
         String password = txtPassword.getText().toString();
 
         // 2. Creating a message from user input data
@@ -56,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         // 4. Sending json message to Server
         JsonObjectRequest request = new JsonObjectRequest(
             Request.Method.POST,
-            "http://10.0.2.2:8000/authenticate",
+            "http://10.0.2.2:8080/authenticate",
             jsonMessage,
             new Response.Listener<JSONObject>() {
                 @Override
@@ -67,7 +65,9 @@ public class LoginActivity extends AppCompatActivity {
                         if(message.equals("Authorized")) {
                             showMessage("Authenticated");
                             Intent intent = new Intent(getActivity(), ContactsActivity.class);
+                            intent.putExtra("username", username);
                             startActivity(intent);
+
                         }
                         else {
                             showMessage("Wrong username or password");
@@ -92,9 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         );
-
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(request);
     }
-
 }
