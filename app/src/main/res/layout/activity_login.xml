@@ -21,12 +21,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CSB01 CHAT"/>
+                android:text="CHAT"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="201810212 - Victor Angelo Peña Andia"/>
+                android:text="201810245 Enrique Sobrados"/>
 
         </LinearLayout>
 
